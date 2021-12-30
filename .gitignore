@@ -1,6 +1,5 @@
 # user defined
 *.csv
-*.ipynb
 model/*
 
 # Byte-compiled / optimized / DLL files
