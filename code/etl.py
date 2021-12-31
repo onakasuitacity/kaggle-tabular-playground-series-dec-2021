@@ -20,11 +20,25 @@ def read_csv(path):
     wilderness_columns = [f"Wilderness_Area{i}" for i in range(1, 5)]
     df["sum_Wilderness"] = df[wilderness_columns].sum(axis=1)
     
+    df["class_Wilderness"] = 0
+    for i, col in enumerate(wilderness_columns):
+        df["class_Wilderness"] += df[col] * 2**i
+    
+    # df.drop(wilderness_columns, axis=1, inplace=True)
+    
     soil_columns = [f"Soil_Type{i}" for i in range(1, 41)]
     df["sum_Soil"] = df[soil_columns].sum(axis=1)
     
     important_soil_columns = [f"Soil_Type{i}" for i in (11, 13, 22, 23, 24, 31, 32, 33, 35, 36, 37, 38, 39, 40)]
     df["important_sum_Soil"] = df[important_soil_columns].sum(axis=1)
+    
+    df["class_Soil_Type"] = 0
+    for i, col in enumerate(important_soil_columns):
+        df["class_Soil_Type"] += df[col] * 2**i
+    
+    df.drop("Soil_Type7", axis=1, inplace=True)
+    df.drop("Soil_Type15", axis=1, inplace=True)
+    # df.drop(soil_columns, axis=1, inplace=True)
     
     return df
 

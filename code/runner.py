@@ -18,7 +18,7 @@ class Runner:
     
     def predict(self, X):
         if len(self.models) > 1:
-            return np.mean([model.predict(X) for model in self.models])
+            return np.mean([model.predict(X) for model in self.models], axis=0)
         else:
             return self.models[0].predict(X)
     
