@@ -22,15 +22,6 @@ class ModelLGB(AbstractModel):
     def get_score(self):
         return list(self.model.best_score["valid_1"].values())[0]
     
-    def save_model(self):
-        path = f"../model/model/{self.name_fold}.model"
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-        joblib.dump(self.model, path, compress=True)
-    
-    def load_model(self):
-        path = f"../model/model/{self.name_fold}.model"
-        self.model = joblib.load(path)
-    
     @property
     def feature_importance_(self):
         return pd.Series(

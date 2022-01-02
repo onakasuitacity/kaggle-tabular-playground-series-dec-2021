@@ -17,13 +17,14 @@ class AbstractModel(metaclass=ABCMeta):
     def get_score(self):
         pass
     
-    @abstractmethod
     def save_model(self):
-        pass
+        path = f"../model/model/{self.name_fold}.model"
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        joblib.dump(self.model, path, compress=True)
     
-    @abstractmethod
     def load_model(self):
-        pass 
+        path = f"../model/model/{self.name_fold}.model"
+        self.model = joblib.load(path)
     
     @property
     def feature_importance_(self):
